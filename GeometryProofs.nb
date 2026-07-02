@@ -10,14 +10,16 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9337,        232]
-NotebookOptionsPosition[      6057,        187]
-NotebookOutlinePosition[      6342,        201]
-CellTagsIndexPosition[      6299,        198]
+NotebookDataLength[     16291,        463]
+NotebookOptionsPosition[     11669,        375]
+NotebookOutlinePosition[     12060,        391]
+CellTagsIndexPosition[     12017,        388]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+
+Cell[CellGroupData[{
 Cell["\<\
 Geometry Theorems: Lean 4 Proofs, Verified in Wolfram Language\
 \>", "Title"],
@@ -30,7 +32,7 @@ that are formally proved in Lean 4 in MyProject/Geometry.lean of this \
 project. Each section states the theorem, names the corresponding Lean \
 theorem, and verifies it symbolically. Evaluate the whole notebook with \
 Evaluation > Evaluate Notebook; every check should return True.\
-\>", "Text"],
+\>", "Text",ExpressionUUID->"a6464980-c492-42b6-aa76-53610158a19c"],
 
 Cell["\<\
 Important difference: Wolfram's Simplify is a computer-algebra check -- you \
@@ -40,6 +42,8 @@ math content, however, is exactly the same: points are integer (here: \
 symbolic) coordinates, and each geometric statement is translated into an \
 algebraic identity.\
 \>", "Text"],
+
+Cell[CellGroupData[{
 
 Cell["Setup: points, vectors, dot product, squared distance", "Section"],
 
@@ -53,11 +57,16 @@ Cell["\<\
 vec[a_, b_] := b - a        (* vector from a to b *)
 dot[u_, v_] := u . v         (* dot product *)
 distSq[a_, b_] := (b - a) . (b - a)   (* squared distance *)\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[11]:=",ExpressionUUID->"28018c40-4938-42ea-9217-afcb394b89ff"],
 
 Cell["\<\
 pA = {ax, ay}; pB = {bx, by}; pC = {cx, cy};  (* symbolic points *)\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"251ce9e8-cec2-44a7-bd6f-6411dc1bb0a5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Theorem 1: symmetry of distance  (Lean: distSq_symm)", "Section"],
 
@@ -66,7 +75,18 @@ Cell["\<\
 commutativity rewrites; here Simplify does the algebra.\
 \>", "Text"],
 
-Cell["Simplify[distSq[pA, pB] == distSq[pB, pA]]", "Input"],
+Cell[CellGroupData[{
+
+Cell["Simplify[distSq[pA, pB] == distSq[pB, pA]]", "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"4ede2614-8f74-41e3-b309-169ef85dfab2"],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.992015468323045*^9},
+ CellLabel->"Out[14]=",ExpressionUUID->"e6157ff5-a2fd-4733-a118-22442932b271"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Theorem 2: Pythagorean theorem  (Lean: pythagoras)", "Section"],
 
@@ -89,7 +109,10 @@ Equivalently, assume the right angle and let Simplify use it:\
 Cell["\<\
 Simplify[distSq[pB, pC] == distSq[pA, pB] + distSq[pA, pC], Assumptions -> \
 dot[vec[pA, pB], vec[pA, pC]] == 0]\
-\>", "Input"],
+\>", "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["\<\
 Theorem 3: the 3-4-5 right triangle  (Lean: pythagoras_3_4_5)\
@@ -100,14 +123,73 @@ A concrete instance: O(0,0), A(3,0), B(0,4). In Lean the tactic `decide` just \
 computes both sides; here the kernel evaluates them too.\
 \>", "Text"],
 
+Cell[CellGroupData[{
+
 Cell["\<\
 distSq[{3, 0}, {0, 4}] == distSq[{0, 0}, {3, 0}] + distSq[{0, 0}, {0, 4}]\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"95da84e7-9cc8-4cfa-b366-b919529fbdbc"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"distSq", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"3", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "4"}], "}"}]}], "]"}], "\[Equal]", 
+  RowBox[{
+   RowBox[{"distSq", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "4"}], "}"}]}], "]"}], "+", 
+   RowBox[{"distSq", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "0"}], "}"}]}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.992015418141168*^9},
+ CellLabel->"Out[8]=",ExpressionUUID->"50e82386-d9fa-4b85-9f01-abecbdfd9047"]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["\<\
 {distSq[{3, 0}, {0, 4}], distSq[{0, 0}, {3, 0}], distSq[{0, 0}, {0, 4}]}   (* \
 25 = 9 + 16 *)\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[9]:=",ExpressionUUID->"2aa70699-d76a-41cb-81aa-65f184c0a0b6"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"distSq", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"3", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "4"}], "}"}]}], "]"}], ",", 
+   RowBox[{"distSq", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "0"}], "}"}]}], "]"}], ",", 
+   RowBox[{"distSq", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "4"}], "}"}]}], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.992015423109106*^9},
+ CellLabel->"Out[9]=",ExpressionUUID->"8ba8728a-2f1a-441e-ba1e-2433c96ea460"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Theorem 4: triangle midsegment  (Lean: midsegment)", "Section"],
 
@@ -118,10 +200,31 @@ and half its length. (Lean states the midpoint condition as 2M = A + B to \
 stay inside the integers; over the rationals we can just divide by 2.)\
 \>", "Text"],
 
+Cell[CellGroupData[{
+
 Cell["\<\
 mM = (pA + pB)/2; mN = (pA + pC)/2;
 Simplify[2 vec[mM, mN] == vec[pB, pC]]\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"06ee2139-1d6d-41f0-b147-398ba62602f6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vec", "[", 
+   RowBox[{"pB", ",", "pC"}], "]"}], "\[Equal]", 
+  RowBox[{"2", " ", 
+   RowBox[{"vec", "[", 
+    RowBox[{
+     FractionBox[
+      RowBox[{"pA", "+", "pB"}], "2"], ",", 
+     FractionBox[
+      RowBox[{"pA", "+", "pC"}], "2"]}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.992015415162759*^9},
+ CellLabel->"Out[7]=",ExpressionUUID->"961a623b-871e-4801-8d5e-473b30864efa"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["\<\
 Theorem 5: parallelogram diagonals bisect each other  (Lean: \
@@ -133,10 +236,25 @@ ABCD is a parallelogram when vector AB equals vector DC, i.e. pD = pC - \
 vec(A,B). Then the midpoints of the two diagonals AC and BD coincide.\
 \>", "Text"],
 
+Cell[CellGroupData[{
+
 Cell["\<\
 pD = pC - vec[pA, pB];
 Simplify[(pA + pC)/2 == (pB + pD)/2]\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[4]:=",ExpressionUUID->"3c87837c-5b72-4f8d-a5bc-32be2be0263d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pA", "+", 
+   RowBox[{"vec", "[", 
+    RowBox[{"pA", ",", "pB"}], "]"}]}], "\[Equal]", "pB"}]], "Output",
+ CellChangeTimes->{3.992015411540317*^9},
+ CellLabel->"Out[5]=",ExpressionUUID->"be587f39-82be-4e96-9102-7b0f925c7d8c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["\<\
 Theorem 6: centroid divides the median 2 : 1  (Lean: centroid_divides)\
@@ -148,10 +266,37 @@ equation AG = 2 GM says G lies on the median from A and divides it in ratio 2 \
 : 1.\
 \>", "Text"],
 
+Cell[CellGroupData[{
+
 Cell["\<\
 pG = (pA + pB + pC)/3; mBC = (pB + pC)/2;
 Simplify[vec[pA, pG] == 2 vec[pG, mBC]]\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"57c69547-6282-4393-aba4-3e9114ff7de6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"vec", "[", 
+   RowBox[{"pA", ",", 
+    RowBox[{
+     FractionBox["1", "3"], " ", 
+     RowBox[{"(", 
+      RowBox[{"pA", "+", "pB", "+", "pC"}], ")"}]}]}], "]"}], "\[Equal]", 
+  RowBox[{"2", " ", 
+   RowBox[{"vec", "[", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "3"], " ", 
+      RowBox[{"(", 
+       RowBox[{"pA", "+", "pB", "+", "pC"}], ")"}]}], ",", 
+     FractionBox[
+      RowBox[{"pB", "+", "pC"}], "2"]}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.9920154022531652`*^9},
+ CellLabel->"Out[3]=",ExpressionUUID->"d48a2703-21d8-4e3e-bccb-51356dedc3f1"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Picture: the 3-4-5 triangle and its midsegment", "Section"],
 
@@ -159,6 +304,8 @@ Cell["\<\
 The red segment joins the midpoints of the two legs; by Theorem 4 it is \
 parallel to the hypotenuse and half as long.\
 \>", "Text"],
+
+Cell[CellGroupData[{
 
 Cell["\<\
 Graphics[{
@@ -172,7 +319,46 @@ Graphics[{
   Text[Style[\"B (0,4)\", 12], {0, 4}, {1.2, -1.3}],
   Text[Style[\"midsegment\", 12, Red], {3/4, 1}, {-1.2, -1}]
 }, Axes -> True, PlotRange -> {{-1, 4}, {-1, 5}}]\
-\>", "Input"],
+\>", "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"c6a73fdc-5632-4e9b-aab1-f80150b9c4a3"],
+
+Cell[BoxData[
+ GraphicsBox[
+  {EdgeForm[{GrayLevel[0], Thickness[Large]}], FaceForm[RGBColor[
+   0.87, 0.94, 1]], PolygonBox[{{0, 0}, {3, 0}, {0, 4}}], 
+   {RGBColor[1, 0, 0], Thickness[Large], 
+    LineBox[NCache[{{Rational[3, 2], 0}, {0, 2}}, {{1.5, 0}, {0, 2}}]], 
+    {GrayLevel[0], PointSize[Large], 
+     PointBox[NCache[{{0, 0}, {3, 0}, {0, 4}, {Rational[3, 2], 0}, {0, 2}}, {{
+        0, 0}, {3, 0}, {0, 4}, {1.5, 0}, {0, 2}}]], InsetBox[
+      StyleBox["\<\"O (0,0)\"\>",
+       StripOnInput->False,
+       FontSize->12], {0, 0}, ImageScaled[{1.15, 1.15}]], InsetBox[
+      StyleBox["\<\"A (3,0)\"\>",
+       StripOnInput->False,
+       FontSize->12], {3, 0}, ImageScaled[{-0.09999999999999998, 1.15}]], 
+     InsetBox[
+      StyleBox["\<\"B (0,4)\"\>",
+       StripOnInput->False,
+       FontSize->12], {0, 4}, ImageScaled[{1.1, -0.15000000000000002}]], 
+     InsetBox[
+      StyleBox["\<\"midsegment\"\>",
+       StripOnInput->False,
+       LineColor->RGBColor[1, 0, 0],
+       FrontFaceColor->RGBColor[1, 0, 0],
+       BackFaceColor->RGBColor[1, 0, 0],
+       GraphicsColor->RGBColor[1, 0, 0],
+       FontSize->12,
+       FontColor->RGBColor[1, 0, 0]], NCache[{Rational[3, 4], 1}, {0.75, 1}], 
+      ImageScaled[{-0.09999999999999998, 0}]]}}},
+  Axes->True,
+  PlotRange->{{-1, 4}, {-1, 5}}]], "Output",
+ CellChangeTimes->{3.9920153885373783`*^9},
+ CellLabel->"Out[1]=",ExpressionUUID->"4013ab7f-6734-491f-a9e2-fa08e8ee9208"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
 
 Cell["Where to go next", "Section"],
 
@@ -184,10 +370,14 @@ Lean kernel accepted every proof. Try changing a conclusion (e.g. the 2:1 \
 ratio to 3:1) and watch Lean reject it, then try the same experiment here \
 with Simplify returning False instead of True.\
 \>", "Text"]
+}, Open  ]]
+}, Open  ]]
 },
-WindowSize->{960, 900},
+WindowSize->{1418, 802},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
 FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (May 11, 2021)",
-StyleDefinitions->"Default.nb"
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"43c2f467-a3e3-4940-ac77-31b44ccc0677"
 ]
 (* End of Notebook Content *)
 
@@ -200,42 +390,82 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 87, 2, 160, "Title",ExpressionUUID->"ea9908ad-2fb9-4b29-9c6e-2a7f25dbb2dd"],
-Cell[648, 24, 75, 0, 53, "Subtitle",ExpressionUUID->"b809ad38-2e3d-4751-b03f-c662430389a4"],
-Cell[726, 26, 383, 6, 81, "Text",ExpressionUUID->"a6464980-c492-42b6-aa76-53610158a19c"],
-Cell[1112, 34, 422, 7, 81, "Text",ExpressionUUID->"999c1566-c6b2-45c2-b75d-53fcd8659938"],
-Cell[1537, 43, 72, 0, 67, "Section",ExpressionUUID->"533284cf-96f1-4906-a5ea-27907ece4b08"],
-Cell[1612, 45, 185, 4, 54, "Text",ExpressionUUID->"799c3c05-c978-455e-b785-c538bc7d43e8"],
-Cell[1800, 51, 185, 4, 66, "Input",ExpressionUUID->"28018c40-4938-42ea-9217-afcb394b89ff"],
-Cell[1988, 57, 92, 2, 30, "Input",ExpressionUUID->"251ce9e8-cec2-44a7-bd6f-6411dc1bb0a5"],
-Cell[2083, 61, 71, 0, 67, "Section",ExpressionUUID->"2f3720ab-1e75-4be9-9f2c-7153a2a6679a"],
-Cell[2157, 63, 154, 3, 31, "Text",ExpressionUUID->"cfc5579c-d3a0-420c-8f19-c493c8c2640c"],
-Cell[2314, 68, 59, 0, 30, "Input",ExpressionUUID->"4ede2614-8f74-41e3-b309-169ef85dfab2"],
-Cell[2376, 70, 69, 0, 67, "Section",ExpressionUUID->"febbd997-e4a6-493a-ae5d-71fb5630469f"],
-Cell[2448, 72, 300, 5, 54, "Text",ExpressionUUID->"58d50ba7-e24f-4b3a-9b19-c6b619de2f97"],
-Cell[2751, 79, 123, 3, 30, "Input",ExpressionUUID->"550b22ea-4d31-4554-914e-ac1f8f58ea8d"],
-Cell[2877, 84, 85, 2, 35, "Text",ExpressionUUID->"4549e125-fe79-44e3-a641-0bbee2ef7991"],
-Cell[2965, 88, 137, 3, 30, "Input",ExpressionUUID->"500480db-823b-4e61-9292-711173383dfa"],
-Cell[3105, 93, 88, 2, 67, "Section",ExpressionUUID->"c503e86c-f3d1-41c3-8b2a-b842b36c68bf"],
-Cell[3196, 97, 160, 3, 31, "Text",ExpressionUUID->"8bfd660d-41a0-4494-8cce-a0e56321830e"],
-Cell[3359, 102, 98, 2, 30, "Input",ExpressionUUID->"95da84e7-9cc8-4cfa-b366-b919529fbdbc"],
-Cell[3460, 106, 119, 3, 30, "Input",ExpressionUUID->"2aa70699-d76a-41cb-81aa-65f184c0a0b6"],
-Cell[3582, 111, 69, 0, 67, "Section",ExpressionUUID->"336be362-98a9-4128-b7b9-6dc63824f58f"],
-Cell[3654, 113, 326, 5, 77, "Text",ExpressionUUID->"803b4a2e-d760-4ebc-bf8b-a0fea77d830d"],
-Cell[3983, 120, 99, 3, 48, "Input",ExpressionUUID->"06ee2139-1d6d-41f0-b147-398ba62602f6"],
-Cell[4085, 125, 109, 3, 30, "Section",ExpressionUUID->"1101d34b-b228-4fb7-8ece-0c4a73d57ca7"],
-Cell[4197, 130, 167, 3, 70, "Text",ExpressionUUID->"68e13f14-edac-41f3-8baf-8c547f53f1d5"],
-Cell[4367, 135, 84, 3, 70, "Input",ExpressionUUID->"3c87837c-5b72-4f8d-a5bc-32be2be0263d"],
-Cell[4454, 140, 97, 2, 70, "Section",ExpressionUUID->"e2a49166-c2d0-4420-bef5-399e25665529"],
-Cell[4554, 144, 183, 4, 70, "Text",ExpressionUUID->"609cf367-2062-4aec-a472-eade9a760712"],
-Cell[4740, 150, 106, 3, 70, "Input",ExpressionUUID->"57c69547-6282-4393-aba4-3e9114ff7de6"],
-Cell[4849, 155, 65, 0, 70, "Section",ExpressionUUID->"d3b08e3c-9997-40e2-949e-9129dd5e86af"],
-Cell[4917, 157, 142, 3, 70, "Text",ExpressionUUID->"c6a44452-d40e-447a-8c8f-b50c9cf821f3"],
-Cell[5062, 162, 510, 12, 70, "Input",ExpressionUUID->"c6a73fdc-5632-4e9b-aab1-f80150b9c4a3"],
-Cell[5575, 176, 35, 0, 70, "Section",ExpressionUUID->"11ac63c0-fd76-4935-8388-210acdc308ce"],
-Cell[5613, 178, 440, 7, 70, "Text",ExpressionUUID->"24c4cee0-f4ab-42b3-b14c-3dec047a7f9d"]
+Cell[CellGroupData[{
+Cell[580, 22, 87, 2, 98, "Title",ExpressionUUID->"ea9908ad-2fb9-4b29-9c6e-2a7f25dbb2dd"],
+Cell[670, 26, 75, 0, 53, "Subtitle",ExpressionUUID->"b809ad38-2e3d-4751-b03f-c662430389a4"],
+Cell[748, 28, 438, 6, 58, "Text",ExpressionUUID->"a6464980-c492-42b6-aa76-53610158a19c"],
+Cell[1189, 36, 422, 7, 58, "Text",ExpressionUUID->"999c1566-c6b2-45c2-b75d-53fcd8659938"],
+Cell[CellGroupData[{
+Cell[1636, 47, 72, 0, 67, "Section",ExpressionUUID->"533284cf-96f1-4906-a5ea-27907ece4b08"],
+Cell[1711, 49, 185, 4, 35, "Text",ExpressionUUID->"799c3c05-c978-455e-b785-c538bc7d43e8"],
+Cell[1899, 55, 264, 5, 66, "Input",ExpressionUUID->"28018c40-4938-42ea-9217-afcb394b89ff"],
+Cell[2166, 62, 171, 3, 30, "Input",ExpressionUUID->"251ce9e8-cec2-44a7-bd6f-6411dc1bb0a5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2374, 70, 71, 0, 67, "Section",ExpressionUUID->"2f3720ab-1e75-4be9-9f2c-7153a2a6679a"],
+Cell[2448, 72, 154, 3, 35, "Text",ExpressionUUID->"cfc5579c-d3a0-420c-8f19-c493c8c2640c"],
+Cell[CellGroupData[{
+Cell[2627, 79, 138, 1, 30, "Input",ExpressionUUID->"4ede2614-8f74-41e3-b309-169ef85dfab2"],
+Cell[2768, 82, 152, 2, 34, "Output",ExpressionUUID->"e6157ff5-a2fd-4733-a118-22442932b271"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2969, 90, 69, 0, 67, "Section",ExpressionUUID->"febbd997-e4a6-493a-ae5d-71fb5630469f"],
+Cell[3041, 92, 300, 5, 58, "Text",ExpressionUUID->"58d50ba7-e24f-4b3a-9b19-c6b619de2f97"],
+Cell[3344, 99, 123, 3, 30, "Input",ExpressionUUID->"550b22ea-4d31-4554-914e-ac1f8f58ea8d"],
+Cell[3470, 104, 85, 2, 35, "Text",ExpressionUUID->"4549e125-fe79-44e3-a641-0bbee2ef7991"],
+Cell[3558, 108, 137, 3, 30, "Input",ExpressionUUID->"500480db-823b-4e61-9292-711173383dfa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3732, 116, 88, 2, 67, "Section",ExpressionUUID->"c503e86c-f3d1-41c3-8b2a-b842b36c68bf"],
+Cell[3823, 120, 160, 3, 35, "Text",ExpressionUUID->"8bfd660d-41a0-4494-8cce-a0e56321830e"],
+Cell[CellGroupData[{
+Cell[4008, 127, 176, 3, 30, "Input",ExpressionUUID->"95da84e7-9cc8-4cfa-b366-b919529fbdbc"],
+Cell[4187, 132, 689, 22, 34, "Output",ExpressionUUID->"50e82386-d9fa-4b85-9f01-abecbdfd9047"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4913, 159, 197, 4, 30, "Input",ExpressionUUID->"2aa70699-d76a-41cb-81aa-65f184c0a0b6"],
+Cell[5113, 165, 698, 22, 34, "Output",ExpressionUUID->"8ba8728a-2f1a-441e-ba1e-2433c96ea460"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5860, 193, 69, 0, 67, "Section",ExpressionUUID->"336be362-98a9-4128-b7b9-6dc63824f58f"],
+Cell[5932, 195, 326, 5, 58, "Text",ExpressionUUID->"803b4a2e-d760-4ebc-bf8b-a0fea77d830d"],
+Cell[CellGroupData[{
+Cell[6283, 204, 177, 4, 48, "Input",ExpressionUUID->"06ee2139-1d6d-41f0-b147-398ba62602f6"],
+Cell[6463, 210, 418, 12, 50, "Output",ExpressionUUID->"961a623b-871e-4801-8d5e-473b30864efa"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6930, 228, 109, 3, 67, "Section",ExpressionUUID->"1101d34b-b228-4fb7-8ece-0c4a73d57ca7"],
+Cell[7042, 233, 167, 3, 35, "Text",ExpressionUUID->"68e13f14-edac-41f3-8baf-8c547f53f1d5"],
+Cell[CellGroupData[{
+Cell[7234, 240, 162, 4, 48, "Input",ExpressionUUID->"3c87837c-5b72-4f8d-a5bc-32be2be0263d"],
+Cell[7399, 246, 260, 6, 34, "Output",ExpressionUUID->"be587f39-82be-4e96-9102-7b0f925c7d8c"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7708, 258, 97, 2, 67, "Section",ExpressionUUID->"e2a49166-c2d0-4420-bef5-399e25665529"],
+Cell[7808, 262, 183, 4, 35, "Text",ExpressionUUID->"609cf367-2062-4aec-a472-eade9a760712"],
+Cell[CellGroupData[{
+Cell[8016, 270, 184, 4, 48, "Input",ExpressionUUID->"57c69547-6282-4393-aba4-3e9114ff7de6"],
+Cell[8203, 276, 600, 18, 51, "Output",ExpressionUUID->"d48a2703-21d8-4e3e-bccb-51356dedc3f1"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8852, 300, 65, 0, 67, "Section",ExpressionUUID->"d3b08e3c-9997-40e2-949e-9129dd5e86af"],
+Cell[8920, 302, 142, 3, 35, "Text",ExpressionUUID->"c6a44452-d40e-447a-8c8f-b50c9cf821f3"],
+Cell[CellGroupData[{
+Cell[9087, 309, 588, 13, 210, "Input",ExpressionUUID->"c6a73fdc-5632-4e9b-aab1-f80150b9c4a3"],
+Cell[9678, 324, 1436, 32, 449, "Output",ExpressionUUID->"4013ab7f-6734-491f-a9e2-fa08e8ee9208"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11163, 362, 35, 0, 67, "Section",ExpressionUUID->"11ac63c0-fd76-4935-8388-210acdc308ce"],
+Cell[11201, 364, 440, 7, 58, "Text",ExpressionUUID->"24c4cee0-f4ab-42b3-b14c-3dec047a7f9d"]
+}, Open  ]]
+}, Open  ]]
 }
 ]
 *)
 
-(* End of internal cache information *)
