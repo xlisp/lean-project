@@ -105,6 +105,20 @@ lake exe my_project
 
 `lake build` 无报错 = 所有定理都被 Lean 内核验证通过。你可以试着把某个定理的结论改错(比如把 `2 : 1` 改成 `3 : 1`),再 build 就会看到 Lean 拒绝接受。
 
+## 不熟悉 Lean?看 Mathematica 对照版
+
+如果你更熟悉 Mathematica,项目里提供了一个**一一对应的 Wolfram 笔记本**(内容为英文,避免 .nb 中文乱码):
+
+```bash
+wolframscript -file generate_notebook.wls
+# 若 wolframscript 不在 PATH 中,用完整路径:
+/Applications/Mathematica.app/Contents/MacOS/wolframscript -file generate_notebook.wls
+```
+
+脚本会先在内核里把六个定理各验证一遍(逐条打印 `True`),然后生成 `GeometryProofs.nb`。用 Mathematica 打开后 Evaluation → Evaluate Notebook,每个定理对应一个 Section:同样的坐标法定义(`vec`、`dot`、`distSq`),用 `Simplify` / `Expand` 验证同样的代数恒等式,最后还有一张 3-4-5 三角形与中位线的图。
+
+两者的区别值得体会:**Mathematica 的 `Simplify` 是计算机代数验算**(你信任 CAS 的实现);**Lean 是证明助理**,每一步推理都被一个极小的逻辑内核核验,编译通过本身就是证明。数学内容则完全相同——这个笔记本正好可以当作读懂 `Geometry.lean` 的桥梁。
+
 ## 项目结构
 
 ```
@@ -112,9 +126,11 @@ lake exe my_project
 ├── lean-toolchain          # 固定 Lean 版本(v4.31.0)
 ├── Main.lean               # 可执行入口
 ├── MyProject.lean          # 库的根模块,汇总导入
-└── MyProject/
-    ├── Basic.lean          # 初始示例
-    └── Geometry.lean       # ★ 几何定理及其证明
+├── MyProject/
+│   ├── Basic.lean          # 初始示例
+│   └── Geometry.lean       # ★ 几何定理及其证明
+├── generate_notebook.wls   # 生成 Mathematica 对照笔记本的脚本
+└── GeometryProofs.nb       # 生成的笔记本(英文,可重新生成)
 ```
 
 ## 想更进一步?
